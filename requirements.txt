@@ -1,0 +1,5 @@
+# Core — needed for Soniox and ElevenLabs backends
+requests>=2.28
+
+# Optional — only needed for the whisper-local backend
+# openai-whisper>=20231117
