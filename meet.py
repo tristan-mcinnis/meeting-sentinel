@@ -207,6 +207,7 @@ def cmd_start(args) -> int:
             "-filter_complex", "[0:a][1:a]amix=inputs=2:duration=longest[aout]",
             "-map", "[aout]",
             "-c:a", "aac", "-b:a", "128k",
+            "-movflags", "+frag_keyframe+empty_moov",
             "-y", str(audio_file),
         ]
         print("Recording mic + system audio (mixed)")
@@ -215,6 +216,7 @@ def cmd_start(args) -> int:
             "ffmpeg",
             "-f", "avfoundation", "-i", f"none:{mic_index}",
             "-c:a", "aac", "-b:a", "128k",
+            "-movflags", "+frag_keyframe+empty_moov",
             "-y", str(audio_file),
         ]
         print("Recording mic only (BlackHole not found)")
@@ -223,6 +225,7 @@ def cmd_start(args) -> int:
             "ffmpeg",
             "-f", "avfoundation", "-i", f"none:{bh_index}",
             "-c:a", "aac", "-b:a", "128k",
+            "-movflags", "+frag_keyframe+empty_moov",
             "-y", str(audio_file),
         ]
         print("Recording system audio only (mic not found)")
