@@ -9,6 +9,8 @@ venv/
 
 # Local state / config (never commit — user-specific)
 .meet-state.json
+config.json
+.env
 
 # Audio & transcript artifacts (never commit user data)
 *.m4a

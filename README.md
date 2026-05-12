@@ -20,7 +20,7 @@ Open [Claude Code](https://claude.com/claude-code) in any terminal and paste
 this prompt — it will clone, install, and walk you through setup:
 
 ```
-Install Meeting Sentinel from https://github.com/tristanmcinnis/meeting-sentinel into ~/tools/meeting-sentinel. Run its install.sh, then run `meet setup` and answer the prompts with me (it will ask where to save audio, where to save transcripts, and which transcription provider to use — Soniox, ElevenLabs, or local Whisper). Check prerequisites (ffmpeg via Homebrew, BlackHole 2ch via Homebrew cask) and install whatever is missing. When done, show me how to run `meet watch`.
+Install Meeting Sentinel from https://github.com/tristan-mcinnis/meeting-sentinel into ~/tools/meeting-sentinel. Run its install.sh, then run `meet setup` and answer the prompts with me (it will ask where to save audio, where to save transcripts, and which transcription provider to use — Soniox, ElevenLabs, or local Whisper). Check prerequisites (ffmpeg via Homebrew, BlackHole 2ch via Homebrew cask) and install whatever is missing. When done, show me how to run `meet watch`.
 ```
 
 Claude will run every step, prompt you for the two folders and the provider,
@@ -44,7 +44,7 @@ brew install --cask blackhole-2ch
 #   Right-click  →  Use This Device For Sound Output
 
 # 3. Clone & install
-git clone https://github.com/tristanmcinnis/meeting-sentinel.git ~/tools/meeting-sentinel
+git clone https://github.com/tristan-mcinnis/meeting-sentinel.git ~/tools/meeting-sentinel
 cd ~/tools/meeting-sentinel
 ./install.sh
 
