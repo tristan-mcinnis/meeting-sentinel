@@ -185,6 +185,10 @@ def cmd_start(args) -> int:
         print("Run `meet stop` first.")
         return 1
 
+    # Clean up stale state from a crash / reboot
+    if _load_state().get("pid"):
+        _clear_state()
+
     _ensure_dirs(cfg)
 
     devices_output = _list_devices_output()
@@ -231,6 +235,10 @@ def cmd_start(args) -> int:
         print("Recording system audio only (mic not found)")
 
     proc = subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    time.sleep(0.5)
+    if proc.poll() is not None:
+        print("ERROR: ffmpeg exited immediately. Run `meet devices` to check audio devices.")
+        return 1
 
     _save_state({
         "pid": proc.pid,
@@ -316,6 +324,7 @@ def _transcribe(cfg: Config, audio_path: Path) -> int:
     transcript_file.write_text(text, encoding="utf-8")
     print(f"\nTranscript saved: {transcript_file}")
     _notify("Meeting Sentinel", f"Transcript ready: {transcript_file.name}")
+    subprocess.run(["open", str(transcript_file)])
     return 0
 
 
@@ -358,7 +367,12 @@ def cmd_watch(args) -> int:
             time.sleep(POLL_INTERVAL)
 
         except KeyboardInterrupt:
-            print("\nStopped.")
+            print("\nInterrupted.")
+            if _is_recording():
+                print("Stopping active recording...")
+                class _B:
+                    no_transcribe = False
+                cmd_stop(_B())
             break
 
     return 0
