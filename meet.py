@@ -324,7 +324,6 @@ def _transcribe(cfg: Config, audio_path: Path) -> int:
     transcript_file.write_text(text, encoding="utf-8")
     print(f"\nTranscript saved: {transcript_file}")
     _notify("Meeting Sentinel", f"Transcript ready: {transcript_file.name}")
-    subprocess.run(["open", str(transcript_file)])
     return 0
 
 
